@@ -38,6 +38,8 @@ Route::get('/home', [FrontendController::class, 'beranda']);
 Route::get('/beranda', [FrontendController::class, 'beranda']);
 Route::get('/detail/{id}', [FrontendController::class, 'detail']);
 
+Route::get('/download', [FrontendController::class, 'download']);
+
 Route::get('/message', function () {
     return view('message');
 });
