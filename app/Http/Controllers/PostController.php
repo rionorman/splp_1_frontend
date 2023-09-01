@@ -43,22 +43,11 @@ class PostController extends Controller
 		$this->validate($request, [
 			'image' => 'required|mimes:jpg,png,jpeg',
 		]);
+
 		$image_ext = $request->image->extension();
 		$image_name = time() . '.' . $image_ext;
 		$request->image->move(public_path('images'), $image_name);
 		$image = 'data:@image/' . $image_ext . ';base64,' . base64_encode(file_get_contents(public_path('images/') . $image_name));
-
-		// $file = fopen(public_path('images/') . $imageName, 'r');
-		// $response = Http::attach(
-		// 	'image',
-		// 	$file,
-		// 	$imageName
-		// )->post($url_api, [
-		// 	'user_id' => $request->user_id,
-		// 	'cat_id' => $request->cat_id,
-		// 	'title' => $request->title,
-		// 	'content' => $request->content
-		// ]);
 
 		$response = Http::post($url_api, [
 			'id' => $request->id,
